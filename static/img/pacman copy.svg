@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="107px" height="121px" viewBox="0 0 107 121" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>pacman copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Landing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy" transform="translate(-664.000000, -410.000000)">
+            <g id="Pacman/Normal" transform="translate(714.000000, 470.500000) rotate(-360.000000) translate(-714.000000, -470.500000) translate(657.000000, 410.000000)">
+                <path d="M7.05154639,89.7409657 C16.7647081,108.379453 35.4756658,121 56.9637827,121 C88.4440134,121 113.963783,93.9132274 113.963783,60.5 C113.963783,27.0867726 88.4440134,0 56.9637827,0 C38.7831746,0 22.5905871,9.034378 12.1536219,23.1041884 L59.892381,61.596159 L7.05154639,89.7409657 Z" id="Combined-Shape" fill="#FFF36E"></path>
+                <ellipse id="Oval-2-Copy-3" fill="#444444" cx="59.9381443" cy="38.6701031" rx="5.87628866" ry="6.2371134"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

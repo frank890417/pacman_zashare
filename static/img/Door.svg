@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="281px" height="497px" viewBox="0 0 281 497" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Door</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Door">
+            <g id="Group-4">
+                <path d="M0,151.109577 C0,73.4330732 72.4716222,-4.7353766e-14 140.5,-5.68434189e-14 C208.528378,-5.68434189e-14 281,73.4330732 281,151.109577 L281,497 L0,497 L0,151.109577 Z" id="Combined-Shape" fill="#FF4C00"></path>
+                <g id="Group" transform="translate(42.000000, 202.000000)" fill-rule="nonzero" fill="#FFFFFF">
+                    <polygon id="Shape" points="90.65 104 124.422137 104 162.227863 104 196 104 143.600017 0"></polygon>
+                    <polygon id="Shape" points="54.7137208 76.5153734 94.7333333 0 0 0 0 24.9721816 42.1079225 24.9721816 0.0759385438 104 89.9112358 104 90.4807749 76.5153734"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

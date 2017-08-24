@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="86px" height="97px" viewBox="0 0 86 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>pacmanDead</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-802.000000, -253.000000)">
+            <g id="Pacman/Dead" transform="translate(797.000000, 253.000000)">
+                <path d="M5.62886598,71.9411047 C13.3823547,86.8827023 28.3182946,97 45.4710897,97 C70.6000458,97 90.9710897,75.2858104 90.9710897,48.5 C90.9710897,21.7141896 70.6000458,0 45.4710897,0 C30.958499,0 18.0328371,7.24243526 9.70157537,18.5215395 L47.8088305,49.378739 L5.62886598,71.9411047 Z" id="Combined-Shape" fill="#FFF36E"></path>
+                <g id="Group" stroke-width="1" transform="translate(48.035613, 25.202796) rotate(-45.000000) translate(-48.035613, -25.202796) translate(37.716025, 14.702796)" fill="#373737">
+                    <rect id="Rectangle" x="8.44329897" y="0" width="3.75257732" height="21"></rect>
+                    <rect id="Rectangle" transform="translate(10.319588, 10.500000) rotate(-270.000000) translate(-10.319588, -10.500000) " x="8.44329897" y="0" width="3.75257732" height="21"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

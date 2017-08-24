@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="97px" height="97px" viewBox="0 0 97 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Pacman/Eat2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Pacman/Eat2">
+            <path d="M3.21010338,65.9680397 C10.221591,84.1224352 27.841529,97 48.4691835,97 C75.2549939,97 96.9691835,75.2858104 96.9691835,48.5 C96.9691835,21.7141896 75.2549939,0 48.4691835,0 C28.1893114,0 10.8165904,12.4469938 3.57375474,30.1182471 L50.961061,49.378739 L3.21010338,65.9680397 Z" id="Combined-Shape" fill="#FFF36E"></path>
+            <circle id="Oval-2-Copy-3" fill="#444444" cx="51" cy="31" r="5"></circle>
+        </g>
+    </g>
+</svg>
