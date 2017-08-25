@@ -13,9 +13,9 @@
       img.b(src='static/img/GamePad/Button/B.svg', @click = "press('b')")
   transition(name="fade")
     .dialog.row(v-if="dialogState")
-      .col-3.colAvator
+      .col-3.col-md-2.colAvator
         img.dialogAvatar(:src="dialogAvatar")
-      .col-9.colContent
+      .col-9.col-md-10.colContent
         p.content(v-html="dialogContent")
         img.dailogAction(src="static/img/Dialog/Action.svg",@click="dailogAction")
   transition-group(tag="div", name="fade")
@@ -53,6 +53,12 @@
             br.hidden-xs-down
             img.pacmanlive(src="static/img/Pacman/Normal.svg",
                 v-for="l in paclives")
+            br.hidden-xs-down
+            br.hidden-xs-down
+            br.hidden-xs-down
+            span.hidden-sm-up &nbsp;&nbsp;|&nbsp;&nbsp;
+            img.pacmanlive(:src="'static/img/Graduate/Level'+(cc+1)+'.svg'",
+                v-for="cc in completeCount")
           h4.hidden-xs-down 按B回到首頁
         .col-12.col-sm-10.order-sm-first-down
           #pacman
@@ -165,7 +171,8 @@ export default {
       pressRecords: [],
       gameInited: false,
       paclives: 2,
-      deadtime: 0
+      deadtime: 0,
+      completeCount: 0
     }
   },
   mounted(){
@@ -223,7 +230,7 @@ export default {
         _this.lastKeycode=event.which;
         setTimeout(()=>{
           _this.canPress=true;
-        },400)
+        },500)
       }
 
     });
@@ -242,7 +249,7 @@ export default {
       this.pacMode = "eating"
       TweenMax.to(".pacman",2,{left: "-250px"})
       TweenMax.to(".pacman",1,{opacity: 0}).delay(1)
-    
+      this.gameScore=0
       setTimeout(()=>{
         _this.gameScene="game"
         _this.dialogAvatar="static/img/Pacman/Normal.svg",
@@ -303,7 +310,11 @@ export default {
           _this.closeDialog()
           setTimeout(()=>{
             _this.gameScene="grave"
-            _this.dialogQuery.push("好可怕...好多墓碑，都是曾經走過來這裡的....不要，媽媽跟我說只要跟大家一樣玩遊戲就會順利的，我們回去玩遊戲，好不好（害怕）")
+
+            _this.dialogQuery.push({
+              avatar: "static/img/Pacman/Normal.svg",
+              content: "好可怕...好多墓碑，都是曾經走過來這裡的....不要，媽媽跟我說只要跟大家一樣玩遊戲就會順利的，我們回去玩遊戲，好不好（害怕）"
+            });
             _this.dialogQuery.push("按上就可以回去ㄌ，遊戲在上面啊啊啊....")
             _this.graveTime=0
             _this.popDialog()
@@ -348,15 +359,11 @@ export default {
             });
             _this.dialogQuery.push({
               avatar: "static/img/Pacman/Normal.svg",
-              content: "這個遊戲，暗喻著中華民國的教育"
+              content: "這遊戲，暗喻著中華民國的教育，不斷考高分/破關，一路從小學讀到研究所，卻還是鬼打牆，找不到出口。"
             });
             _this.dialogQuery.push({
               avatar: "static/img/Pacman/Normal.svg",
-              content: "不斷考高分 破關，開始新的一關，一路從小學讀到研究所"
-            });
-            _this.dialogQuery.push({
-              avatar: "static/img/Pacman/Normal.svg",
-              content: "卻還是不斷鬼打牆，找不到出口。"
+              content: "人生的出口，也許一直都在，只是我們鼓起勇氣，從一開始就走出框架，踏出教育迷宮外"
             });
             _this.dialogQuery.push({
               avatar: "static/img/Pacman/Normal.svg",
@@ -383,7 +390,7 @@ export default {
         TweenMax.to(".pacman",2,{top: "-500px"}).delay(1)
         _this.changeScene("index",3)
         _this.closeDialog();
-        setTimeOut(()=>{
+        setTimeout(()=>{
           _this.dialogQuery.push({
             avatar: "static/img/Grandma.svg",
             content: "這才是我的乖孫啊！ 緊去讀冊哦"
@@ -425,9 +432,9 @@ export default {
         //TweenMax.to(".pacman",0.5,{rotation: "-90deg"})
         //TweenMax.to(".pacman",5,{top: "100%"}).delay(1)
         _this.changeScene("door",5)
-        setTimeOut(()=>{
+        setTimeout(()=>{
           _this.dialogQuery.push({
-            avatar: "static/img/Knight.svg",
+            avatar: "static/img/Pacman/Normal.svg",
             content: "哇，居然找到這個地方，那你一定與眾不同"
           });
           _this.popDialog()
@@ -498,6 +505,13 @@ export default {
       if (this.pressRecords.join("/")==["up", "up", "down", "down", "left", "left", "right",'right','a','b','a','b'].join("/")){
         this.goSecret();
       }
+
+
+      //對話框，嘗試新的可能性
+      if (key=="otherRoute"){
+        this.goOtherRoute()
+      }
+
       console.log(this.pressRecords)
     },
     dailogAction(){
@@ -539,7 +553,7 @@ export default {
     setlives(l){
       this.paclives = l
     },
-    eatenPill(text){
+    eatenPill(text,restart=false){
       PACMAN.pauseGame()
       this.dialogQuery.push({
         avatar: "static/img/Pacman/Grandma.svg",
@@ -548,6 +562,9 @@ export default {
       this.dialogQuery.push(()=>{
         this.closeDialog()
         PACMAN.resumeGame()
+        if (restart){
+          PACMAN.startLevel()
+        }
 
         var PLAYING = 7
         PACMAN.setState(PLAYING)
@@ -598,33 +615,7 @@ export default {
         })
         _this.popDialog()
       }else if (_this.deadtime>=2){
-        _this.dialogQuery.push({
-          avatar: "static/img/Pacman/Normal.svg",
-          content: "在中華民國教育的迷宮中，無止盡的求高分並沒有出口"
-        });
-        _this.dialogQuery.push({
-          avatar: "static/img/Pacman/Normal.svg",
-          content: "我們在不斷的競爭與分數中，迷失了自我，你，還記得自己小時候的夢想嗎？"
-        });
-        _this.dialogQuery.push({
-          avatar: "static/img/Pacman/Normal.svg",
-          content: "讓我們，嘗試另一條路，從一開始就走出框架的路"
-        });
-        _this.popDialog()
-
-        _this.dialogQuery.push(()=>{
-          
-          _this.changeScene("index",0.5)
-                  
-        })
-        _this.dialogQuery.push({
-            avatar: "static/img/Pacman/Normal.svg",
-            content: "我們回到了首頁，請一直按下，不要管阿嬤的阻止，也不要害怕"
-          });    
-        _this.dialogQuery.push({
-            avatar: "static/img/Pacman/Normal.svg",
-            content: "就可以看到教育的大門了"
-        });    
+        _this.goOtherRoute()
 
 
       }
@@ -635,23 +626,87 @@ export default {
     },
     userCompleteLevel(){
       let _this = this
-      _this.dialogQuery.push({
-        avatar: "static/img/Pacman/Normal.svg",
-        content: "恭喜你 在中華民國教育迷宮裡面獲得順利，但是人生的成功真的是由分數定義的嗎？"
-      });
-      _this.dialogQuery.push({
-        avatar: "static/img/Pacman/Normal.svg",
-        content: " 要不要試試從一開始就走不同方向呢？<br>A 玩夠了，我要探索分數之外的可能性 | B 不管，我要繼續玩！！"
-      });
-      _this.dialogQuery.push({
-        avatar: "static/img/Pacman/Normal.svg",
-        content: " 要不要試試從一開始就走不同方向呢？<br><span onclick='window.press(\"a\")'> A 玩夠了，我要探索分數之外的可能性</span> | <span onclick='window.press(\"b\")'> B 不管，我要繼續玩！！</span>"
-      });
+      _this.completeCount++;
 
-     
+      if (_this.completeCount==1){
+        _this.dialogQuery.push({
+          avatar: "static/img/Graduate/Level1.svg",
+          content: "小學畢業啦!!! 拿到了藍色的畢業證書"
+        });
+      }
+      if (_this.completeCount==2){
+        _this.dialogQuery.push({
+          avatar: "static/img/Graduate/Level2.svg",
+          content: "國中畢業啦!!! 拿到了綠色的畢業證書"
+        });
+      }
+      if (_this.completeCount==3){
+        _this.dialogQuery.push({
+          avatar: "static/img/Graduate/Level3.svg",
+          content: "高中畢業啦!!! 拿到了粉色的畢業證書"
+        });
+      }
+      if (_this.completeCount==4){
+        _this.dialogQuery.push({
+          avatar: "static/img/Graduate/Level4.svg",
+          content: "大學畢業啦!!! 拿到了紫色的畢業證書"
+        });
+      }
+
+      if (_this.completeCount==5){
+        _this.dialogQuery.push({
+          avatar: "static/img/Pacman/Dead.svg",
+          content: "研究所畢業啦!!! 啊...啊罵 我失業了..."
+        });
+      }
+      _this.dialogQuery.push({
+        avatar: "static/img/Pacman/Normal.svg",
+        content: "恭喜你在中華民國教育迷宮裡獲得階段勝利，但人生的成功真的是由分數定義的嗎？"
+      });
+      _this.dialogQuery.push({
+        avatar: "static/img/Pacman/Normal.svg",
+        content: "要不要試試從一開始就走不同方向呢？<br><span class='dialogOption' onclick='window.press(\"otherRoute\")'> <img src='static/img/GamePad/Button/A.svg' class='gamePadBtn'> 玩夠了，我要探索分數之外的可能性</span> | <span  class='dialogOption' onclick='window.press(\"a\")'>  <img src='static/img/GamePad/Button/B.svg' class='gamePadBtn'>  不管，我要繼續玩！！</span>"
+      });
+      _this.dialogQuery.push(()=>{
+        PACMAN.startLevel();
+      })
 
       _this.popDialog();
       
+    },
+    goOtherRoute(){
+      let _this = this
+      _this.dialogQuery=[];
+      _this.dialogQuery.push({
+        avatar: "static/img/Pacman/Normal.svg",
+        content: "在中華民國教育的迷宮中，無止盡的求高分並沒有出口"
+      });
+      _this.dialogQuery.push({
+        avatar: "static/img/Pacman/Normal.svg",
+        content: "我們在不斷的競爭與分數中，迷失了自我，你，還記得自己小時候的夢想嗎？"
+      });
+      _this.dialogQuery.push({
+        avatar: "static/img/Pacman/Normal.svg",
+        content: "讓我們，嘗試另一條路，從一開始就走出框架的路"
+      });
+      _this.popDialog()
+
+      _this.dialogQuery.push(()=>{
+        
+        _this.changeScene("index",0.5)
+        setTimeout(()=>{
+          _this.popDialog()
+        },500)
+                
+      })
+      _this.dialogQuery.push({
+          avatar: "static/img/Pacman/Normal.svg",
+          content: "我們回到了首頁，請一直按下，不要管阿嬤的阻止，也不要害怕"
+        });    
+      _this.dialogQuery.push({
+          avatar: "static/img/Pacman/Normal.svg",
+          content: "就可以看到教育的大門了"
+      });    
     }
   }
 }
@@ -668,7 +723,6 @@ $colorOrange: #FF4C00
 
 .fade-enter, .fade-leave-to
   opacity: 0
-
 
 
 .pacman
@@ -711,7 +765,7 @@ $colorOrange: #FF4C00
   .pacmanlive
     width: 8vw 
     max-width: 50px
-    margin-right: 3vw
+    margin-right: 20px
     display: inline-block
   
   
@@ -766,7 +820,7 @@ $colorOrange: #FF4C00
 .sceneGame
   canvas
     width: 100%
-    mix-blend-mode: multiply
+    mix-blend-mode: lighten
 </style>
 
 

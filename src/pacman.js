@@ -838,11 +838,11 @@ var PACMAN = (function () {
 
     function dialog(text) {
         ctx.fillStyle = "#FFFFFF";
-        ctx.font = map.blockSize+" Arial";
+        ctx.font = map.blockSize+"px Arial";
         var width = ctx.measureText(text).width,
             x = ((22 * map.blockSize) / 2 - width / 2);
 
-        ctx.fillText(text, x, ((map.height * 10) + 8) * 2);
+        ctx.fillText(text, x, (map.height * 16.5) * 2);
     }
 
     function soundDisabled() {
@@ -890,21 +890,22 @@ var PACMAN = (function () {
     }
 
     function keyDown(e) {
+        //將預設的遊戲控制取消
         if (e.keyCode === KEY.N) {
-            startNewGame();
+            //startNewGame();
         } else if (e.keyCode === KEY.S) {
-            audio.disableSound();
-            localStorage["soundDisabled"] = !soundDisabled();
+            //audio.disableSound();
+            //localStorage["soundDisabled"] = !soundDisabled();
         } else if (e.keyCode === KEY.P && state === PAUSE) {
-            audio.resume();
-            map.draw(ctx);
-            setState(stored);
+            //audio.resume();
+            //map.draw(ctx);
+            //setState(stored);
         } else if (e.keyCode === KEY.P) {
-            stored = state;
-            setState(PAUSE);
-            audio.pause();
-            map.draw(ctx);
-            dialog("Paused");
+            //stored = state;
+            //setState(PAUSE);
+            //audio.pause();
+            //map.draw(ctx);
+            //dialog("Paused");
         } else if (state !== PAUSE) {
             return user.keyDown(e);
         }
@@ -929,15 +930,12 @@ var PACMAN = (function () {
         setState(WAITING)
         user.loseLife();
 
+        
         if (user.getLives() == 1) {
             window.eatenPill(
-                "有些迷宮一但進去就走不出來，就像你的人生一樣…",
-
+                "有些迷宮一但進去就走不出來，就像你的人生一樣…"
+                ,true
             )
-        }
-
-        if (user.getLives() > 0) {
-            startLevel();
         } else {
             window.toSceneDead("其實你從開始就應該試試看不同的方向")
         }
@@ -1086,7 +1084,7 @@ var PACMAN = (function () {
                     lastTime = diff;
                     map.draw(ctx);
 
-                    dialog("Starting in: " + diff);
+                    dialog("Starting in " + diff);
                 }
             }
         }
@@ -1117,7 +1115,7 @@ var PACMAN = (function () {
         level += 1;
         map.reset();
         user.newLevel();
-        startLevel();
+        //startLevel();
         window.userCompleteLevel()
     };
 

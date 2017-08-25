@@ -36,6 +36,8 @@ body
   background: linear-gradient($gridColor 0%, $gridColor 5% ,transparent 5%, transparent 100%),linear-gradient(90deg,$gridColor 0%, $gridColor 5% ,transparent 5%, transparent 100%)
   background-size: 20px 20px
 
+
+
 .gamePad
   position: fixed
   right: 100px
@@ -144,6 +146,19 @@ h4
     cursor: pointer
     &:hover
       opacity: 0.8
+
+  .dialogOption
+    cursor: pointer
+    &:hover .gamePadBtn
+      transform: scale(1.2)
+    
+
+  //選單裡面的遊戲按鈕
+  .gamePadBtn
+    width: 40px
+    cursor: pointer
+    &:hover
+      transform: scale(1.2)
 
 @media screen and (max-width: 800px)
   h1

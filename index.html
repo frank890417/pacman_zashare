@@ -7,7 +7,7 @@
     <title>雜學校募資頁！？中華民國の教育迷宮</title>
     <meta property="og:title" content="雜學校募資頁！？中華民國の教育迷宮">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="http://zashare.org/img/2017/og.jpg">
+    <meta property="og:image" content="http://zashare.org/pacman/static/img/og.png">
     <meta property="og:description" content="聽說只要拿100分，人生就會一片光明呢，往左開始進入中華民國教育迷宮，盡可能的拿到高分數炫耀吧！！">
     
     <script src="static/js/modernizr-1.5.min.js"></script>
@@ -46,11 +46,43 @@
   
   </script>
 
-  
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '756438861174269',
+        xfbml      : true,
+        version    : 'v2.10'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
   
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=811633118987541&ev=PageView&noscript=1"
   /></noscript>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBGJCWaeIcJn7NQ7heXtO7VN79_NzOIi5o",
+      authDomain: "pacman-zashare.firebaseapp.com",
+      databaseURL: "https://pacman-zashare.firebaseio.com",
+      projectId: "pacman-zashare",
+      storageBucket: "pacman-zashare.appspot.com",
+      messagingSenderId: "401199722634"
+    };
+    firebase.initializeApp(config);
+  </script>
   <!-- End Facebook Pixel Code -->
 
 
